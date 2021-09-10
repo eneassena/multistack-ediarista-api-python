@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Listando Usuários {% endblock %}
+
+{% block content %}
+<h1 class="text-dark text-center">Lista de Usuários</h1>
+<table class="table border">
+  <thead>
+    <tr>
+      <th class="text-center">Nome</th>
+      <th class="text-center">Action</th>
+    </tr>
+  </thead>
+
+  {% for usuario in usuarios %}
+  <tbody>
+    <tr class="text-center">
+      <td> {{usuario.username }} </td>
+      <td>
+        <a class="text-dark btn btn-secondary "
+           href="{% url 'editar_usuarios' usuario.id %}">Editar</a>
+      </td>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
+<hr class="border">
+<a href="{% url 'cadastrar_usuarios' %}" class="btn btn-primary">Novo serviço</a>
+{% endblock %}

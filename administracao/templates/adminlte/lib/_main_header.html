@@ -1,0 +1,34 @@
+{% extends 'adminlte/lib/_main_header.html' %}
+
+{# alterando as rotas de logout e alterar senha #}
+{% block change_password_url %}{% url 'alterar_senha' %}{% endblock %}
+{% block logout_url %}{% url 'usuario_logout' %}{% endblock %}
+
+
+{% block nav_bar %}
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" data-widget="pushmenu" href="/"><i class="fas fa-bars"></i></a>
+  </li>
+  <li class="nav-item d-none d-sm-inline-block">
+    <a href="{% url 'listagem_services' %}" class="nav-link">Home</a>
+  </li>
+</ul>
+
+
+{% block nav_custom_menu %}
+<ul class="navbar-nav ml-auto">
+  <ul class="nav navbar-nav">
+    {% block header_dropdowns %}
+    {% block user_info %}
+
+    {{block.super}}
+
+    {% endblock %}
+    {% endblock %}
+  </ul>
+</ul>
+
+{% endblock %}
+
+{% endblock nav_bar %}

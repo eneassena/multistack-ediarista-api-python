@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Listagem serviços {% endblock title %}
+
+{% block content %}
+<h1 class="text-dark text-center">Lista de Serviços</h1>
+<table class="table border">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Valor Minimo</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  {% for service in list_services %}
+  <tbody>
+    <tr>
+      <td> {{service.nome }} </td>
+      <td> {{service.valor_minimo }} </td>
+      <td>
+        <a class="text-dark btn btn-outline-secondary "
+          href="{% url 'editar_servico' service_id=service.id %}">Editar</a>
+      </td>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
+<hr class="border">
+<a href="{% url 'cadastrar_servico' %}" class="btn btn-success">Novo serviço</a>
+{% endblock content %}

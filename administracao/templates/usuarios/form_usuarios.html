@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %} Cadastrar Usuário {% endblock %}
+
+
+{% block content %}
+<div class="card card-primary">
+    <div class="card-header">
+        <div class="card-title">
+            {% if request.resolver_match.url_name == 'cadastrar_usuarios' %}
+                Novo Usuário
+            {% else %}
+                Editação de Usuário
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form cadastro_usuario_form %}
+        <input type="submit" class="btn btn-outline-primary" value="Salvar" />
+    </form>
+</div>
+{% endblock %}
