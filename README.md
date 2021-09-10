@@ -3,12 +3,15 @@
 ## Instalando o projeto
 
 ### Clonando o projeto
-`https://github.com/eneas200/projeto-mult-stack-ediarista-backend.git`
+
+`https://github.com/eneassena/multistack-ediarista-api-python.git`
 
 ### Instalar as dependências
+
 `pip install -r requirements.txt`
 
 ### Alterar as configuração do banco de dados em settings.py no dicionário `DATABASES`
+
 ```py
 DATABASES = {
     'default': {
@@ -21,8 +24,11 @@ DATABASES = {
     }
 }
 ```
+
 ### Realizar a migração
+
 `py manage.py migrate`
 
 ### Roda o servidor
+
 `py manage.py runserver`
