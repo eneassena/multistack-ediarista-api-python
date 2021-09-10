@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adminlte3',
     'bootstrap4',
+    'localflavor',
+    'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
