@@ -38,3 +38,10 @@ class Usuario(AbstractUser):
                                      validators=[validate_image_file_extension, ])
     foto_documento = models.ImageField(null=False, upload_to=nome_arquivo_documento,
                                        validators=[validate_image_file_extension, ])
+
+
+class CidadesAtendimento(models.Model):
+    codigo_bge = models.IntegerField(null=False, blank=False)
+    cidade = models.CharField(max_length=100, null=False, blank=False)
+    estado = models.CharField(max_length=2, null=False, blank=False)
+    usuario = models.ManyToManyField(Usuario, related_name='cidades_atendidas')
