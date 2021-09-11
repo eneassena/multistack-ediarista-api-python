@@ -3,15 +3,16 @@ from rest_framework.response import Response
 from ..models import Usuario
 from ..serializers.diaristas_localidade_serializer import DiaristasLocalidadeSerializer
 from rest_framework import status as status_http
-from ..services.cidade_atendimento_service import buscar_cidade_cep
+from ..services import cidade_atendimento_service as service_cidades
+from ..pagination.diaristas_localidade_pagination import DiaristasLocalidadePagination
 
 
-class DiaristasLocalidade(APIView):
+class DiaristasLocalidade(APIView, DiaristasLocalidadePagination):
     def get(self, request, format=None):
-
         cep = self.request.query_params.get('cep', None)
-
-        diaristas = Usuario.objects.filter(tipo_usuario=2)
+        diaristas = service_cidades.listar_diaristas_cidade(cep)
+        resultado = self.paginate_queryset(diaristas, request)
         serialize_diarista_localidade = DiaristasLocalidadeSerializer(
-            diaristas, many=True)
-        return Response(buscar_cidade_cep(cep), status=status_http.HTTP_200_OK)
+            resultado, many=True, context={'request': request}
+        )
+        return self.get_paginated_response(serialize_diarista_localidade.data)

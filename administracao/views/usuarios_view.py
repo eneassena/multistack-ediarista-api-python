@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
 
-@login_required
+# @login_required
 def cadastrar_usuario(request):
     if request.method == "POST":
         cadastro_form_usuario = CadastroUsuarioForm(request.POST)
@@ -27,7 +27,8 @@ def listar_usuario(request):
 def editar_usuarios(request, usuario_id):
     User = get_user_model()
     usuario = User.objects.get(id=usuario_id)
-    editar_usuario_form = EditarUsuarioForm(request.POST or None, instance=usuario)
+    editar_usuario_form = EditarUsuarioForm(
+        request.POST or None, instance=usuario)
     if editar_usuario_form.is_valid():
         editar_usuario_form.save()
         return redirect('listar_usuario')
