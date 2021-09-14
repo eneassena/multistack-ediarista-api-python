@@ -13,6 +13,13 @@ def listar_diaristas_cidade(cep):
         return []
 
 
+def verificar_disponibilidade_cidade(cep: int):
+    codigo_ibge = buscar_cidade_cep(cep)['ibge']
+    return CidadesAtendimento.objects.filter(
+        codigo_ibge=codigo_ibge
+    ).exists()
+
+
 def buscar_cidade_cep(cep: int):
     url = f'https://viacep.com.br/ws/{cep}/json/'
     requisicao = requests.get(url)
