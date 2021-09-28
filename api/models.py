@@ -1,21 +1,24 @@
 import uuid
 import os
-from django.core import validators
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from localflavor.br.models import BRCPFField
 from django.core.validators import validate_image_file_extension
-
+from .managers import diarista_managers
+from django.contrib.auth.models import UserManager
 
 def nome_arquivo_foto(instance, filename):
     ext = filename.split('.')[-1]
-    filename = '%s.%s' % (uuid(), ext)
+    filename = '%s.%s' % (uuid.uuid4(), ext)
+
     return os.path.join('usuarios', filename)
 
 
 def nome_arquivo_documento(instance, filename):
     ext = filename.split('.')[-1]
-    filename = '%s.%s' % (uuid(), ext)
+    filename = '%s.%s' % (uuid.uuid4(), ext)
+
     return os.path.join('documentos', filename)
 
 
@@ -25,6 +28,7 @@ class Usuario(AbstractUser):
         (2, "Diarista")
     )
 
+    username = None
     name_completo = models.CharField(max_length=255, null=True, blank=False)
     cpf = BRCPFField(null=True, unique=True, blank=False)
     nascimento = models.DateField(null=True, blank=False)
@@ -38,17 +42,16 @@ class Usuario(AbstractUser):
                                      validators=[validate_image_file_extension, ])
     foto_documento = models.ImageField(null=True, upload_to=nome_arquivo_documento,
                                        validators=[validate_image_file_extension, ])
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
-        'nome_completo',
-        'cpf',
-        'telefone',
-        'tipo_usuario'
-        'reputacao',
-        'chave_pix',
-        'foto_usuario',
-        'foto_documento'
+        'nome_completo', 'cpf',
+        'telefone', 'tipo_usuario',
+        'reputacao', 'chave_pix',
+        'foto_usuario', 'foto_documento'
     ]
+
+    objects = UserManager()
+    diarista_object = diarista_managers.DiaristaManager()
 
 
 class CidadesAtendimento(models.Model):
