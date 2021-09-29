@@ -5,7 +5,8 @@ from .views import (
     disponibilidade_atendimento_cidade_view as disponibilidade_cidade_view,
     servico_view,
     inicio_view,
-    usuario_view
+    usuario_view,
+    me_view
 )
 
 
@@ -30,6 +31,6 @@ urlpatterns = [
     path('', inicio_view.Inicio.as_view(),
          name='inicio'
          ),
-    path('usuarios', usuario_view.Usuario.as_view(), name='usuario-list')
-
+    path('usuarios', usuario_view.Usuario.as_view(), name='usuario-list'),
+    path('me', me_view.Me.as_view(), name='me-list')
 ]
