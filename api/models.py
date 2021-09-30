@@ -21,6 +21,11 @@ def nome_arquivo_documento(instance, filename):
 
     return os.path.join('documentos', filename)
 
+class ExempleTable(models.Model):
+    nome_field = models.CharField(max_length=150, null=False, blank=False)
+    email = models.EmailField(max_length=200, null=False, blank=False)
+
+
 
 class Usuario(AbstractUser):
     TIPO_USUARIO_CHOICES = (

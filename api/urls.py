@@ -32,5 +32,5 @@ urlpatterns = [
          name='inicio'
          ),
     path('usuarios', usuario_view.Usuario.as_view(), name='usuario-list'),
-    path('me', me_view.Me.as_view(), name='me-list')
+    path('me', me_view.Me.as_view(), name='me-list'),
 ]
